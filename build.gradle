@@ -132,7 +132,7 @@ targetCompatibility = 1.8
 compileJava {
     dependsOn spotlessApply
     JavaVersion targetVersion = JavaVersion.toVersion(targetCompatibility);
-    if (targetVersion.isJava9Compatible()) {
+    if (targetVersion.isJava9Compatible() || targetVersion.isCompatibleWith(JavaVersion.VERSION_17)) {
         options.compilerArgs += ["--add-exports", "jdk.attach/sun.tools.attach=ALL-UNNAMED"]
     }
 }
@@ -209,7 +209,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.6
+                minimum = 0.3
             }
         }
     }
