@@ -126,13 +126,14 @@ opensearchplugin {
     classname 'org.opensearch.performanceanalyzer.PerformanceAnalyzerPlugin'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 10
+targetCompatibility = 10
 
 compileJava {
     dependsOn spotlessApply
     JavaVersion targetVersion = JavaVersion.toVersion(targetCompatibility);
-    if (targetVersion.isJava9Compatible() || targetVersion.isCompatibleWith(JavaVersion.VERSION_17)) {
+    println "current: " + JavaVersion.current()
+    if (JavaVersion.current() > JavaVersion.VERSION_1_8) {
         options.compilerArgs += ["--add-exports", "jdk.attach/sun.tools.attach=ALL-UNNAMED"]
     }
 }
